@@ -19,7 +19,7 @@
 
 	//	CGContextRef context = cgcontext
 	
-	IRWMFExportSession *exportSession = [[[IRWMFExportSession alloc] init] autorelease];
+	IRWMFExportSession *exportSession = [[IRWMFExportSession alloc] init];
 	
 	[self.wmfRecords enumerateObjectsUsingBlock: ^ (IRWMFRecord *aRecord, NSUInteger idx, BOOL *stop) {
 	
@@ -45,7 +45,7 @@
 
 - (NSArray *) copyEmbeddedImages {
 
-	NSMutableArray *returnedArray = [[NSMutableArray array] retain];
+	NSMutableArray *returnedArray = [NSMutableArray array];
 	
 	[self.wmfRecords enumerateObjectsUsingBlock: ^ (IRWMFRecord *aRecord, NSUInteger idx, BOOL *stop) {
 	
@@ -57,7 +57,7 @@
 			return;
 		
 		CGImageRef bitmapImage = [bitmapObject image];
-		[returnedArray addObject:(id)bitmapImage];
+		[returnedArray addObject:(__bridge id)bitmapImage];
 		
 	}];
 	

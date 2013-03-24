@@ -41,7 +41,7 @@
 	NSUInteger currentRecordSize = 0;
 	NSError *currentRecordDecodingError = nil;
 	
-	IRWMFDocument *document = [[[IRWMFDocument alloc] init] autorelease];
+	IRWMFDocument *document = [[IRWMFDocument alloc] init];
 	
 	while (consumedBytes < totalBytes) {
 	
@@ -50,7 +50,7 @@
 		if (!currentRecord) {
 			NSLog(@"Error decoding: %@", currentRecordDecodingError);
 			if (error) {
-				error = &currentRecordDecodingError;
+				*error = currentRecordDecodingError;
 			}
 			return nil;
 		}

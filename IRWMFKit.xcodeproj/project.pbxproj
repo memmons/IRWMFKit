@@ -558,6 +558,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -577,6 +578,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -634,9 +636,11 @@
 		FFAE51DB147055C00006BA76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/IRWMFKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRWMFKit/IRWMFKit-Prefix.pch";
+				GCC_VERSION = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -649,9 +653,11 @@
 		FFAE51DC147055C00006BA76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/IRWMFKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRWMFKit/IRWMFKit-Prefix.pch";
+				GCC_VERSION = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

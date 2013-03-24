@@ -17,7 +17,7 @@
 
 	NSMutableData *pngData = [NSMutableData data];
 	
-	CGImageDestinationRef pngDestination = CGImageDestinationCreateWithData((CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
+	CGImageDestinationRef pngDestination = CGImageDestinationCreateWithData(( CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
 	CGImageDestinationAddImage(pngDestination, anImage, NULL);
 	CGImageDestinationFinalize(pngDestination);
 	
@@ -72,7 +72,7 @@
 	IRWMFDocument *document = [[self newTestDocument] autorelease];
 	
 	CGImageRef fullResolutionImage = [document newFullResolutionImage];
-	STAssertNotNil((id)fullResolutionImage, @"Document should export.");
+	STAssertNotNil(( id)fullResolutionImage, @"Document should export.");
 	
 	if (fullResolutionImage)
 		CFRelease(fullResolutionImage);

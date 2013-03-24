@@ -20,22 +20,22 @@
 
 static void __attribute__((constructor)) initialize() {
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFHeaderRecord") forRecordType:IRWMFRecordHeaderType];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetMapModeRecord") forRecordType:IRWMFRecordType_META_SETMAPMODE];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetWindowOriginRecord") forRecordType:IRWMFRecordType_META_SETWINDOWORG];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetWindowExtentRecord") forRecordType:IRWMFRecordType_META_SETWINDOWEXT];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFSaveDeviceContextRecord") forRecordType:IRWMFRecordType_META_SAVEDC];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetStretchBiltRecord") forRecordType:IRWMFRecordType_META_SETSTRETCHBLTMODE];
-	
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFBitMapStretchRecord") forRecordType:IRWMFRecordType_META_DIBSTRETCHBLT];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFBitMapStretchRecord") forRecordType:IRWMFRecordType_META_STRETCHDIB];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFHeaderRecord") forRecordType:IRWMFRecordHeaderType];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetMapModeRecord") forRecordType:IRWMFRecordType_META_SETMAPMODE];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetWindowOriginRecord") forRecordType:IRWMFRecordType_META_SETWINDOWORG];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetWindowExtentRecord") forRecordType:IRWMFRecordType_META_SETWINDOWEXT];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFSaveDeviceContextRecord") forRecordType:IRWMFRecordType_META_SAVEDC];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFSetStretchBiltRecord") forRecordType:IRWMFRecordType_META_SETSTRETCHBLTMODE];
+		
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFBitMapStretchRecord") forRecordType:IRWMFRecordType_META_DIBSTRETCHBLT];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFBitMapStretchRecord") forRecordType:IRWMFRecordType_META_STRETCHDIB];
 
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFRestoreDeviceContextRecord") forRecordType:IRWMFRecordType_META_RESTOREDC];
-	[IRWMFRecord setClass:NSClassFromString(@"IRWMFEndOfFileRecord") forRecordType:IRWMFRecordType_META_EOF];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFRestoreDeviceContextRecord") forRecordType:IRWMFRecordType_META_RESTOREDC];
+		[IRWMFRecord setClass:NSClassFromString(@"IRWMFEndOfFileRecord") forRecordType:IRWMFRecordType_META_EOF];
 
-	[pool drain];	
+	}	
 }
 
 
@@ -66,7 +66,7 @@ static void __attribute__((constructor)) initialize() {
 
 	#endif
 	
-	IRWMFRecord *returnedRecord = [[(IRWMFRecord *)[usedClass alloc] init] autorelease];
+	IRWMFRecord *returnedRecord = [(IRWMFRecord *)[usedClass alloc] init];
 	[returnedRecord configureWithData:data offset:offsetBytes usedBytes:numberOfConsumedBytes error:error];
 	
 	return returnedRecord;
@@ -156,7 +156,7 @@ static void __attribute__((constructor)) initialize() {
 	NSParameterAssert(aClass);
 	NSParameterAssert([aClass canHandleRecordType:aType]);
 	
-	CFDictionarySetValue([self recordTypesToHandlerClasses], (void *)aType, aClass);
+	CFDictionarySetValue([self recordTypesToHandlerClasses], (void *)aType, (__bridge const void *)(aClass));
 
 }
 

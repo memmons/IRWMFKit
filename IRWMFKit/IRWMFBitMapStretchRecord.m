@@ -22,12 +22,6 @@
 @synthesize destinationRectHeight, destinationRectWidth, destinationRectYOffset, destinationRectXOffset;
 @synthesize bitmapObject;
 
-- (void) dealloc {
-
-	[bitmapObject release];
-	[super dealloc];
-
-}
 
 - (void) configureWithData:(NSData *)data offset:(NSUInteger)offsetBytes usedBytes:(NSUInteger *)numberOfConsumedBytes error:(NSError **)error {
 
@@ -42,7 +36,7 @@
 	int16_t recordFunction = OSReadLittleInt16(dataBytes, ownOffset);
 	ownOffset += 2;
 	
-	BOOL recordHasEmbeddedBitmap;
+	BOOL recordHasEmbeddedBitmap = NO;
 	BOOL recordHasColorUsageEnumeration = NO;
 	
 	switch (recordFunction) {
@@ -100,7 +94,7 @@
 		NSUInteger bitmapObjectSize = 0;
 		NSError *bitmapDecodingError = nil;
 		
-		bitmapObject = [[IRWMFBitmapObject objectWithData:data offset:ownOffset usedBytes:&bitmapObjectSize error:&bitmapDecodingError] retain];
+		bitmapObject = [IRWMFBitmapObject objectWithData:data offset:ownOffset usedBytes:&bitmapObjectSize error:&bitmapDecodingError];
 		
 		NSParameterAssert(recordSize == ((ownOffset - offsetBytes) + bitmapObjectSize));
 		
@@ -140,7 +134,7 @@
 - (NSString *) descriptionSubstring {
 
 	return [[[super descriptionSubstring] stringByAppendingString:[NSString stringWithFormat:	
-		@"; Raster Operation = %x; Color Usage = %x; From Rect = { %f, %f; %f, %f }; To Rect = { %f, %f; %f, %f }; Bitmap = ",
+		@"; Raster Operation = %x; Color Usage = %x; From Rect = { %hd, %hd; %hd, %hd }; To Rect = { %hd, %hd; %hd, %hd }; Bitmap = ",
 		rasterOperation, colorUsage,
 		sourceRectXOffset, sourceRectYOffset, sourceRectWidth, sourceRectHeight,
 		destinationRectXOffset, destinationRectYOffset, destinationRectWidth, destinationRectHeight

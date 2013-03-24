@@ -12,9 +12,9 @@
 #import "IRWMFDecoding.h"
 
 @interface IRWMFDocument ()
-@property (nonatomic, readwrite, retain) NSData *data;
-@property (nonatomic, readwrite, retain) NSArray *wmfObjects;
-@property (nonatomic, readwrite, retain) NSArray *wmfRecords;
+@property (nonatomic, readwrite, strong) NSData *data;
+@property (nonatomic, readwrite, strong) NSArray *wmfObjects;
+@property (nonatomic, readwrite, strong) NSArray *wmfRecords;
 @end
 
 @implementation IRWMFDocument
@@ -22,7 +22,7 @@
 
 + (id) documentWithData:(NSData *)data {
 
-	return [[[self alloc] initWithData:data] autorelease];
+	return [[self alloc] initWithData:data];
 
 }
 
@@ -38,21 +38,13 @@
 
 }
 
-- (void) dealloc {
-
-	[data release];
-	[wmfObjects release];
-	[wmfRecords release];
-	[super dealloc];
-
-}
 
 - (NSArray *) wmfRecords {
 
 	if (wmfRecords)
 		return wmfRecords;
 
-	NSData *capturedData = [[self.data retain] autorelease];
+	NSData *capturedData = self.data;
 	if (!capturedData)
 		return nil;
 	
@@ -81,7 +73,7 @@
 		return nil;
 	}
 	
-	self.wmfRecords = [[records copy] autorelease];
+	self.wmfRecords = [records copy];
 	return wmfRecords;
 
 }

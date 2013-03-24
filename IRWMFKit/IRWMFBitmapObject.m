@@ -14,12 +14,10 @@
 
 - (void) dealloc {
 
-	[infoHeader release];
 	
 	if (image)
 		CFRelease(image);
 	
-	[super dealloc];
 
 }
 
@@ -32,7 +30,7 @@
 	
 	NSUInteger headerLength = 0;
 	NSError *headerReadingError = nil;
-	infoHeader = [[IRWMFBitmapInfoHeaderObject objectWithData:data offset:ownOffset usedBytes:&headerLength error:&headerReadingError] retain];
+	infoHeader = [IRWMFBitmapInfoHeaderObject objectWithData:data offset:ownOffset usedBytes:&headerLength error:&headerReadingError];
 	ownOffset += headerLength;
 	
 	if (!infoHeader) {

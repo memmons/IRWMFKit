@@ -23,6 +23,6 @@
 @property (nonatomic, readonly, assign) int16_t destinationRectYOffset;
 @property (nonatomic, readonly, assign) int16_t destinationRectXOffset;
 
-@property (nonatomic, readonly, retain) IRWMFBitmapObject *bitmapObject;	//	may be nil if record does not embed stuff
+@property (nonatomic, readonly, strong) IRWMFBitmapObject *bitmapObject;	//	may be nil if record does not embed stuff
 
 @end

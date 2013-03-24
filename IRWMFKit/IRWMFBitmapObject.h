@@ -12,7 +12,7 @@
 
 @interface IRWMFBitmapObject : IRWMFObject
 
-@property (nonatomic, readonly, retain) IRWMFBitmapInfoHeaderObject *infoHeader;
+@property (nonatomic, readonly, strong) IRWMFBitmapInfoHeaderObject *infoHeader;
 @property (nonatomic, readonly, assign) CGImageRef image;
 
 @end

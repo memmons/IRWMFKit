@@ -44,7 +44,6 @@
 	if (context)
 		CFRelease(context);
 	
-	[super dealloc];
 
 }
 
